@@ -1,0 +1,110 @@
+" === system 
+if has("win32")||has("win64")||has("win95")||has("win16")
+    let g:isWIN = 1
+else
+    let g:isWIN = 0
+endif
+
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
+if g:isWIN&&g:isGUI
+    let plugpath = 'D:\Vim\vimfiles\plugged'
+elseif g:isWIN
+    let plugpath = '/d/Vim/vimfiles/plugged'
+else
+    let plugpath = '/home/WJ/.vim/plugged'
+endif
+
+" ===main setting commands
+let mapleader=" "
+syntax on
+:colorscheme molokai
+set background=dark
+set lines=40 columns=130
+set noeb vb t_vb=
+set nobackup
+set noundofile
+set nohlsearch
+
+set number
+" set relativenumber
+set showcmd
+set ignorecase
+set smartcase
+set tabstop=4
+set expandtab
+set shiftwidth=4
+set autoindent
+set fileencodings=utf-8,gbk,ucs-bom,cp936,latin1
+set guifont=Consolas:h10
+
+" ===screen split
+noremap sk :set nosplitbelow<CR>:split 
+noremap sj :set splitbelow<CR>:split 
+noremap sh :set nosplitright<CR>:vsplit 
+noremap sl :set splitright<CR>:vsplit 
+
+noremap <LEADER>q :q<CR>
+noremap <LEADER>w :w<CR>
+noremap <C-q> :q!<CR>
+
+noremap K 5k
+noremap J 5j
+noremap H 5h
+noremap L 5l
+
+map <up> <C-w>k
+map <down> <C-w>j
+map <left> <C-w>h
+map <right> <C-w>l
+
+map <C-up> :res +5<CR>
+map <C-down> :res -5<CR>
+map <C-left> :vertical resize -5<CR>
+map <C-right> :vertical resize +5<CR>
+
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap ( ()<ESC>i
+inoremap < <><ESC>i
+
+vnoremap ' di''<ESC>hp
+vnoremap [ di[]<ESC>hp
+vnoremap { di{}<ESC>hp
+vnoremap ( di()<ESC>hp
+vnoremap < di<><ESC>hp
+
+inoremap <C-l> <ESC>/'\\|"\\|]\\|}\\|)\\|><CR>a
+inoremap <C-h> <ESC>i
+inoremap <S-CR> <ESC>o
+inoremap <C-CR> <ESC>O
+
+autocmd FileType python noremap ma iif<SPACE>__name__<SPACE>==<SPACE>"__main__":<CR>
+
+map <F5> :call Compile()<CR>
+map <LEADER><F5> :source $MYVIMRC<CR>
+func! Compile()
+    exec "w"
+    if &filetype == 'python'
+        exec "!python %"
+    endif
+endfunc
+
+
+" === Vim-Plugs
+
+call plug#begin(plugpath)
+
+Plug 'scrooloose/nerdtree'
+
+call plug#end()
+
+" === nerdtree config
+noremap <C-t> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
