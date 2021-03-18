@@ -1,37 +1,18 @@
-" === system 
-if has("win32")||has("win64")||has("win95")||has("win16")
-    let g:isWIN = 1
-else
-    let g:isWIN = 0
-endif
-
-if has("gui_running")
-    let g:isGUI = 1
-else
-    let g:isGUI = 0
-endif
-
-if g:isWIN&&g:isGUI
-    let plugpath = 'D:\Vim\vimfiles\plugged'
-elseif g:isWIN
-    let plugpath = '/d/Vim/vimfiles/plugged'
-else
-    let plugpath = '/home/WJ/.vim/plugged'
-endif
-
 " ===main setting commands
 let mapleader=" "
 syntax on
-:colorscheme molokai
+colorscheme evening
+set cursorline
+" set cursorcolumn
 set background=dark
-set lines=40 columns=130
+set lines=30 columns=100
 set noeb vb t_vb=
 set nobackup
 set noundofile
 set nohlsearch
 
 set number
-" set relativenumber
+set relativenumber
 set showcmd
 set ignorecase
 set smartcase
@@ -39,8 +20,10 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set autoindent
-set fileencodings=utf-8,gbk,ucs-bom,cp936,latin1
+set fileencodings=utf-8,UTF-8,gbk,ucs-bom,cp936,latin1
+set encoding=utf-8
 set guifont=Consolas:h10
+set clipboard=unnamed
 
 " ===screen split
 noremap sk :set nosplitbelow<CR>:split 
@@ -99,9 +82,14 @@ endfunc
 
 " === Vim-Plugs
 
+let plugpath = '~/.vim/plugged'
 call plug#begin(plugpath)
 
-Plug 'scrooloose/nerdtree'
+Plug 'junegunn/vim-plug'
+Plug 'preservim/nerdtree'
+Plug 'gcmt/wildfire.vim'
+Plug 'tpope/vim-surround'
+Plug 'mg979/vim-visual-multi'
 
 call plug#end()
 
