@@ -5,7 +5,6 @@ colorscheme evening
 set cursorline
 " set cursorcolumn
 set background=dark
-set lines=30 columns=100
 set noeb vb t_vb=
 set nobackup
 set noundofile
@@ -50,35 +49,14 @@ map <C-down> :res -5<CR>
 map <C-left> :vertical resize -5<CR>
 map <C-right> :vertical resize +5<CR>
 
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap ( ()<ESC>i
-inoremap < <><ESC>i
-
 vnoremap ' di''<ESC>hp
 vnoremap [ di[]<ESC>hp
 vnoremap { di{}<ESC>hp
 vnoremap ( di()<ESC>hp
 vnoremap < di<><ESC>hp
 
-inoremap <C-l> <ESC>/'\\|"\\|]\\|}\\|)\\|><CR>a
-inoremap <C-h> <ESC>i
 inoremap <S-CR> <ESC>o
 inoremap <C-CR> <ESC>O
-
-autocmd FileType python noremap ma iif<SPACE>__name__<SPACE>==<SPACE>"__main__":<CR>
-
-map <F5> :call Compile()<CR>
-map <LEADER><F5> :source $MYVIMRC<CR>
-func! Compile()
-    exec "w"
-    if &filetype == 'python'
-        exec "!python %"
-    endif
-endfunc
-
 
 " === Vim-Plugs
 
